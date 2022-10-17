@@ -12,7 +12,8 @@ public class Test {
 		// objTest.create_data( "pri", "Bachhav", "AirForce_camp", "Nashik",
 		// "Maharashtra", "422207", "98474582");
 		// objTest.read_data("pri");
-		objTest.update_data("pri", "Airforce_camp", "Nsk", "MH", "8767", "88888888", "98474582");
+		//objTest.update_data("pri", "Airforce_camp", "Nsk", "MH", "8767", "88888888", "98474582");
+		objTest.delete_data("pri");
 	}
 
 	public void read_data(String firstName) {
@@ -82,6 +83,26 @@ public class Test {
 			pa.setString(4, stateName);
 			pa.setString(5, phoneNumber);
 			pa.setString(6, new_phoneNumber);
+
+			System.out.println(pa);
+			pa.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void delete_data(String firstName) {
+
+		AddressBook objAddressBook = new AddressBook();
+		Connection connection = objAddressBook.get_connection();
+
+		PreparedStatement pa = null;
+
+		try {
+			String query = "delete from contact where firstName = ?";
+			pa = connection.prepareStatement(query);
+			pa.setString(1, firstName);
 
 			System.out.println(pa);
 			pa.executeUpdate();
